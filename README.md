@@ -1,2 +1,2 @@
-# Video-frame-image-save
-Save video frame as a photo file
+# Videoframe-Image-save
+Save video frame as a .jpg file
