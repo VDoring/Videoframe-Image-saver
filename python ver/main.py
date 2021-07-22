@@ -6,9 +6,9 @@ import os
 # 타이틀화면을 표시합니다.
 def mainTitle():
     os.system('mode con cols=45 lines=10')
-    os.system('title VFrame Image v0.2')
+    os.system('title VFrame Image v0.2.1')
     print('\n       < Video Frame Image Converter >')
-    print('            ver0.2 - by VDoring\n\n')
+    print('            ver0.2.1 - by VDoring\n\n')
     os.system('pause')
 
 # by VDoring. 2021-07-21
@@ -62,6 +62,14 @@ def convertFrameImage(filename):
     if filename == 'EXIT':
         return
 
+    output_path = 'outputImage/' + filename[:-4]
+
+    try:
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+    except OSError:
+        print('[!] Create directory ERROR [!]')
+
     try:
         capture = cv2.VideoCapture('inputVideo/' + filename)
         
@@ -69,7 +77,7 @@ def convertFrameImage(filename):
 
         while True:
             ret, image = capture.read()
-            cv2.imwrite("outputImage/%d.jpg" %int(capture.get(cv2.CAP_PROP_POS_FRAMES)), image)
+            cv2.imwrite(output_path+"/%d.jpg" %int(capture.get(cv2.CAP_PROP_POS_FRAMES)), image)
             print('Running.. [' + str(int(capture.get(cv2.CAP_PROP_POS_FRAMES))) + '/' + str(int(video_frame_all)) + ']')
 
     except KeyboardInterrupt:
